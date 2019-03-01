@@ -24,7 +24,7 @@ public class a05_03MaxHappy {
     }
 
     public static ReturnData process(Node head){
-
+        int happy = head.happy;
     }
 }
 
