@@ -95,6 +95,10 @@ public class a03_04Morris {
                 cur = cur.right;
             }
         }
+<<<<<<< HEAD
+=======
+        printEdge(head);//最后打印一遍
+>>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
     }
 
     private static void printEdge(Node head) {
@@ -109,11 +113,19 @@ public class a03_04Morris {
 
     private static Node reverse(Node cur) {
         Node pre = null;
+<<<<<<< HEAD
         while (cur != null) {
             Node next = cur.right;
             cur.right = pre;
             pre = cur;
             next.right = cur;
+=======
+        Node next = null;
+        while (cur != null) {
+            next = cur.right;
+            cur.right = pre;
+            pre = cur;
+>>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
             cur = next;
         }
         return pre;
@@ -130,6 +142,11 @@ public class a03_04Morris {
         baseMorris(head);
         System.out.println();
         preMorris(head);
+<<<<<<< HEAD
+=======
+        System.out.println();
+        posMorris(head);
+>>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
     }
 }
 

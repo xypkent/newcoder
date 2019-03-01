@@ -63,7 +63,10 @@ public abstract class AbstractSelfBalancingBinarySearchTree extends AbstractBina
         node.parent = temp;
 
         // temp took over node's place so now its parent should point to temp
+<<<<<<< HEAD
         //如果删除的节点有父结点，让新节点指向父结点
+=======
+>>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
         if (temp.parent != null) {
             if (node == temp.parent.left) {
                 temp.parent.left = temp;

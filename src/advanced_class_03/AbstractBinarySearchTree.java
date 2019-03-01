@@ -13,7 +13,11 @@ package advanced_class_03;
  * @created Jun 29, 2011
  * 
  */
+<<<<<<< HEAD
 public class AbstractBinarySearchTree {
+=======
+public class AbstractBinarySearchTree {//搜索二叉树
+>>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
 
 	/** Root node where whole tree starts. */
 	public Node root;
@@ -73,7 +77,11 @@ public class AbstractBinarySearchTree {
 			size++;
 			return root;
 		}
+<<<<<<< HEAD
 
+=======
+		//查找插入的父节点，找到不能再找
+>>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
 		Node insertParentNode = null;
 		Node searchTempNode = root;
 		while (searchTempNode != null && searchTempNode.value != null) {
@@ -133,13 +141,19 @@ public class AbstractBinarySearchTree {
 					nodeToReturn = transplant(deleteNode, deleteNode.left);
 				} else {
 					Node successorNode = getMinimum(deleteNode.right);
+<<<<<<< HEAD
 					//右子树可能出现，只有一个节点的情况
+=======
+>>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
 					if (successorNode.parent != deleteNode) {
 						transplant(successorNode, successorNode.right);
 						successorNode.right = deleteNode.right;
 						successorNode.right.parent = successorNode;
 					}
+<<<<<<< HEAD
 					//如果只有一个节点直接替换就行，不用考虑右子树的子节点
+=======
+>>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
 					transplant(deleteNode, successorNode);
 					successorNode.left = deleteNode.left;
 					successorNode.left.parent = successorNode;
@@ -162,6 +176,10 @@ public class AbstractBinarySearchTree {
 	 * 
 	 * @return New replaced node.
 	 */
+<<<<<<< HEAD
+=======
+	//相应的环境移交给newNode
+>>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
 	private Node transplant(Node nodeToReplace, Node newNode) {
 		if (nodeToReplace.parent == null) {
 			this.root = newNode;
