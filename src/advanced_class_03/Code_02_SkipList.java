@@ -7,6 +7,8 @@ public class Code_02_SkipList {
 
 	public static class SkipListNode {
 		public Integer value;
+		//长度为10，说明有10层，nextNodes[0]代表在0层上他的下一个节点是什么
+		//从高层到下
 		public ArrayList<SkipListNode> nextNodes;
 
 		public SkipListNode(Integer value) {
@@ -35,9 +37,9 @@ public class Code_02_SkipList {
 	}
 
 	public static class SkipList {
-		private SkipListNode head;
+		private SkipListNode head;//巨小，层数是最高的
 		private int maxLevel;
-		private int size;
+		private int size;//加进来了多少个key
 		private static final double PROBABILITY = 0.5;
 
 		public SkipList() {
@@ -59,7 +61,7 @@ public class Code_02_SkipList {
 					level++;
 				}
 				while (level > maxLevel) {
-					head.nextNodes.add(null);
+					head.nextNodes.add(null);//头增加区域到最大层数
 					maxLevel++;
 				}
 				SkipListNode newNode = new SkipListNode(newValue);

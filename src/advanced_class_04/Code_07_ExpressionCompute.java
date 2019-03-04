@@ -8,19 +8,22 @@ public class Code_07_ExpressionCompute {
 		return value(str.toCharArray(), 0)[0];
 	}
 
+	//返回数组[计算结果，计算到哪个位置]
 	public static int[] value(char[] str, int i) {
+		//双端队列
 		LinkedList<String> que = new LinkedList<String>();
-		int pre = 0;
+		int pre = 0;//收集数字
 		int[] bra = null;
 		while (i < str.length && str[i] != ')') {
-			if (str[i] >= '0' && str[i] <= '9') {
+			if (str[i] >= '0' && str[i] <= '9') {//把数字重组
 				pre = pre * 10 + str[i++] - '0';
-			} else if (str[i] != '(') {
+			} else if (str[i] != '(') {// + - * /
+				//收集数字和符号
 				addNum(que, pre);
 				que.addLast(String.valueOf(str[i++]));
 				pre = 0;
-			} else {
-				bra = value(str, i + 1);
+			} else {// 当前i位置为(
+				bra = value(str, i + 1);//不管，直接递归
 				pre = bra[0];
 				i = bra[1] + 1;
 			}

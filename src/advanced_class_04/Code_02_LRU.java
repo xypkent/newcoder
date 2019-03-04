@@ -5,17 +5,17 @@ import java.util.HashMap;
 public class Code_02_LRU {
 
 	public static class Node<K,V> {
-		public V value;
 		public K key;
+		public V value;
 		public Node<K,V> last;
 		public Node<K,V> next;
 
 		public Node(K key,V value) {
-			this.value = value;
 			this.key = key;
+			this.value = value;
 		}
 	}
-
+	//定制的双向链表
 	public static class NodeDoubleLinkedList<K,V> {
 		private Node<K,V> head;
 		private Node<K,V> tail;
@@ -32,13 +32,13 @@ public class Code_02_LRU {
 			if (this.head == null) {
 				this.head = newNode;
 				this.tail = newNode;
-			} else {
+			} else {//最新的添加到尾部
 				this.tail.next = newNode;
 				newNode.last = this.tail;//新节点的前一个是之前的尾部
 				this.tail = newNode;
 			}
 		}
-
+		//操作节点后把结点调整在尾部
 		public void moveNodeToTail(Node<K,V> node) {
 			if (this.tail == node) {
 				return;
@@ -56,7 +56,7 @@ public class Code_02_LRU {
 			this.tail.next = node;
 			this.tail = node;
 		}
-
+		//容量满了删除最不经常操作的数
 		public Node<K,V> removeHead() {
 			if (this.head == null) {
 				return null;
@@ -76,6 +76,7 @@ public class Code_02_LRU {
 	}
 
 	public static class MyCache<K, V> {
+		//通过key可以找到Node
 		private HashMap<K, Node<K,V>> keyNodeMap;
 		private NodeDoubleLinkedList<K,V> nodeList;
 		private int capacity;
@@ -103,7 +104,7 @@ public class Code_02_LRU {
 				Node<K,V> node = this.keyNodeMap.get(key);
 				node.value = value;
 				this.nodeList.moveNodeToTail(node);
-			} else {
+			} else {//没有就新增
 				Node<K,V> newNode = new Node<K,V>(key,value);
 				this.keyNodeMap.put(key, newNode);
 				this.nodeList.addNode(newNode);

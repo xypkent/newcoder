@@ -6,10 +6,11 @@ public class a05_03MaxHappy {
 
     public static class Node {
         public int happy;
-        public ArrayList<Node> child;
+        public ArrayList<Node> childs;
 
         public Node(int happy) {
             this.happy = happy;
+            childs = new ArrayList<>();
         }
     }
 
@@ -24,7 +25,22 @@ public class a05_03MaxHappy {
     }
 
     public static ReturnData process(Node head){
-        int happy = head.happy;
+        int come = head.happy;
+        int notCome = 0;
+
+        for (Node node:head.childs){
+            ReturnData rd = process(node);
+            come += rd.come;
+            notCome += Math.max(rd.come,rd.notCome);
+        }
+        return new ReturnData(come,notCome);
+
+    }
+
+    public static void main(String[] args) {
+        Node node1 = new Node(10);
+        ReturnData data = process(node1);
+        System.out.println(Math.max(data.come, data.notCome));
     }
 }
 
