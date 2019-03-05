@@ -7,7 +7,8 @@ public class Code_02_SkipList {
 
 	public static class SkipListNode {
 		public Integer value;
-		//长度为10，说明有10层，nextNodes[0]代表在0层上他的下一个节点是什么
+		//长度为10，说明有10层，nextNodes[1]代表在1层上他的下一个节点是什么
+		//0层指向null，1指向第一层他的下一个结点是谁，以此类推
 		//从高层到下
 		public ArrayList<SkipListNode> nextNodes;
 
@@ -65,12 +66,24 @@ public class Code_02_SkipList {
 					maxLevel++;
 				}
 				SkipListNode newNode = new SkipListNode(newValue);
-				SkipListNode current = head;
+				SkipListNode current = head;//从头部往下移动
+				int levelAll = maxLevel;//从最高层开始找
 				do {
-					current = findNext(newValue, current, level);
-					newNode.nextNodes.add(0, current.nextNodes.get(level));
-					current.nextNodes.set(level, newNode);
-				} while (level-- > 0);
+					current = findNext(newValue, current, levelAll);
+					if (levelAll <= level){//达到应该加入节点的层
+						//前后环境接上
+						//当前层，建立指向刚好比自己大的节点的联系
+						//例如一共5层，由于是从高层开始插入，先把第五层加入0位置
+						//接着第四层的时候也是加到0位置，那就把原本第五层的挤到1位置
+						//...以此类推，加到最后一层就会是正常的0位置
+						// 最后一层也已经被挤到最后的位置上
+						newNode.nextNodes.add(0, current.nextNodes.get(level));
+						//把刚好比他小的节点，指向他。例如：7--->10 加入8 变成7--->8--->10
+						current.nextNodes.set(level, newNode);
+						level--;
+					}
+
+				} while (levelAll-- > 0);//当前层小了往右，大了往下
 			}
 		}
 
@@ -105,12 +118,15 @@ public class Code_02_SkipList {
 
 		// Returns the node at a given level with highest value less than e
 		private SkipListNode findNext(Integer e, SkipListNode current, int level) {
+			//获得当前节点所在层中连接的下一个节点(例如cur在第七层中的下一个)
 			SkipListNode next = current.nextNodes.get(level);
 			while (next != null) {
 				Integer value = next.value;
 				if (lessThan(e, value)) { // e < value
-					break;
+					break;//如果下一个数比新增值大了，就找到接入位置。
+					//cur就是这一层中，最后一个小于当前数的值。
 				}
+				//向右动
 				current = next;
 				next = current.nextNodes.get(level);
 			}
