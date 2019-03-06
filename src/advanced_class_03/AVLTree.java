@@ -87,11 +87,7 @@ public class AVLTree extends AbstractSelfBalancingBinarySearchTree {
                     node = (AVLNode)doubleRotateRightLeft(node);
                     break;
                 }
-<<<<<<< HEAD
-            } else if (nodeBalance == -2) {
-=======
             } else if (nodeBalance == -2) {//左树超了
->>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
                 if (node.left.left != null) {
                     node = (AVLNode)avlRotateRight(node);
                     break;
