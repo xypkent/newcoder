@@ -22,7 +22,7 @@ public class Code_03_MaxDistanceInTree {
 		public int h;
 		
 		public ReturnType(int m, int h) {
-			this.maxDistance = m;;
+			this.maxDistance = m;
 			this.h = h;
 		}
 	}
@@ -37,8 +37,8 @@ public class Code_03_MaxDistanceInTree {
 		int p1 = leftReturnType.maxDistance;
 		int p2 = rightReturnType.maxDistance;
 		int resultDistance = Math.max(Math.max(p1, p2), includeHeadDistance);
-		int hitself  = Math.max(leftReturnType.h, leftReturnType.h) + 1;
-		return new ReturnType(resultDistance, hitself);
+		int hitSelf  = Math.max(leftReturnType.h, leftReturnType.h) + 1;
+		return new ReturnType(resultDistance, hitSelf);
 	}
 
 	public static int posOrder(Node head, int[] record) {
@@ -47,11 +47,11 @@ public class Code_03_MaxDistanceInTree {
 			return 0;
 		}
 		int lMax = posOrder(head.left, record);
-		int maxfromLeft = record[0];
+		int maxFromLeft = record[0];
 		int rMax = posOrder(head.right, record);
 		int maxFromRight = record[0];
-		int curNodeMax = maxfromLeft + maxFromRight + 1;
-		record[0] = Math.max(maxfromLeft, maxFromRight) + 1;
+		int curNodeMax = maxFromLeft + maxFromRight + 1;
+		record[0] = Math.max(maxFromLeft, maxFromRight) + 1;
 		return Math.max(Math.max(lMax, rMax), curNodeMax);
 	}
 

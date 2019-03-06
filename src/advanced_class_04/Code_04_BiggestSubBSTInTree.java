@@ -64,10 +64,8 @@ public class Code_04_BiggestSubBSTInTree {
 				Math.min(Math.min(leftSubTressInfo.min,rightSubTressInfo.min),head.value),
 				Math.max(Math.max(leftSubTressInfo.max,rightSubTressInfo.max),head.value));	
 	}
-	
-	
-	
 
+	//数组实现版本
 	public static Node posOrder(Node head, int[] record) {
 		if (head == null) {
 			record[0] = 0;

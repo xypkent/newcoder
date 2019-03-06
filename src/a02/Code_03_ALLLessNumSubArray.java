@@ -69,10 +69,7 @@ public class Code_03_ALLLessNumSubArray {
     }
 
     public static void main(String[] args) {
-<<<<<<< HEAD
         // TODO Auto-generated method stub
-=======
->>>>>>> 0f1e08fe64ad7f74b41cfd8622839e9577de4cd2
         int[] arr_test = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         int num_test = 4;
         int res_test;
