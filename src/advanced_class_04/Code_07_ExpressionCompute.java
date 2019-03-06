@@ -15,13 +15,13 @@ public class Code_07_ExpressionCompute {
 		int pre = 0;//收集数字
 		int[] bra = null;
 		while (i < str.length && str[i] != ')') {
-			if (str[i] >= '0' && str[i] <= '9') {//把数字重组
+			if (str[i] >= '0' && str[i] <= '9') {//把数字重组，注意有=
 				pre = pre * 10 + str[i++] - '0';
 			} else if (str[i] != '(') {// + - * /
-				//收集数字和符号
+				//收集数字和符号，数字+符号是一组
 				addNum(que, pre);
 				que.addLast(String.valueOf(str[i++]));
-				pre = 0;
+				pre = 0;//注意清0
 			} else {// 当前i位置为(
 				bra = value(str, i + 1);//不管，直接递归
 				pre = bra[0];
@@ -37,7 +37,7 @@ public class Code_07_ExpressionCompute {
 			int cur = 0;
 			String top = que.pollLast();
 			if (top.equals("+") || top.equals("-")) {
-				que.addLast(top);
+				que.addLast(top);//放回去
 			} else {
 				cur = Integer.valueOf(que.pollLast());
 				num = top.equals("*") ? (cur * num) : (cur / num);
@@ -46,6 +46,7 @@ public class Code_07_ExpressionCompute {
 		que.addLast(String.valueOf(num));
 	}
 
+	//计算加减
 	public static int getNum(LinkedList<String> que) {
 		int res = 0;
 		boolean add = true;

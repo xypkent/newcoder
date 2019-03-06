@@ -154,7 +154,7 @@ public class Code_03_LFU {
 					if (headList == nextList) {//判断头链表是否有变化
 						headList = newList;
 					}
-					heads.put(node, newList);
+					heads.put(node, newList);//加入记录
 				}
 			}
 		}
