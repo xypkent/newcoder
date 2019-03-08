@@ -2,8 +2,8 @@ package advanced_class_05;
 
 public class Code_05_Max_EOR {
 
-	public static class Node {
-		public Node[] nexts = new Node[2];
+	public static class Node {//前缀树
+		public Node[] nexts = new Node[2];//只有两个路，0/1
 	}
 
 	public static class NumTrie {
@@ -11,8 +11,10 @@ public class Code_05_Max_EOR {
 
 		public void add(int num) {
 			Node cur = head;
+			//位移，整数是31位
 			for (int move = 31; move >= 0; move--) {
-				int path = ((num >> move) & 1);
+				//提取出每个进制里面的数字
+				int path = ((num >> move) & 1);//1,0
 				cur.nexts[path] = cur.nexts[path] == null ? new Node() : cur.nexts[path];
 				cur = cur.nexts[path];
 			}
@@ -42,7 +44,8 @@ public class Code_05_Max_EOR {
 		NumTrie numTrie = new NumTrie();
 		numTrie.add(0);
 		for (int i = 0; i < arr.length; i++) {
-			eor ^= arr[i];
+			eor ^= arr[i];// 0 .. i
+			//这个黑盒超好用，放入0~i eor，给你选择出一个最大的
 			max = Math.max(max, numTrie.maxXor(eor));
 			numTrie.add(eor);
 		}
