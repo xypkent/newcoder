@@ -9,17 +9,22 @@ public class Code_02_CardsInLine {
 		return Math.max(f(arr, 0, arr.length - 1), s(arr, 0, arr.length - 1));
 	}
 
-	public static int f(int[] arr, int i, int j) {
+	public static int f(int[] arr, int i, int j) {//先拿的
+		//如果i == j，即arr[i...j]上只有一张纸牌，当然会被先拿纸牌的人拿走，所以可以返回arr[i];
 		if (i == j) {
 			return arr[i];
 		}
+		//拿了其中一个之后，当前玩家成了后拿的那个人
+		//因为当前的玩家会做出最好的选择，所以会拿走最好的
 		return Math.max(arr[i] + s(arr, i + 1, j), arr[j] + s(arr, i, j - 1));
 	}
 
-	public static int s(int[] arr, int i, int j) {
+	public static int s(int[] arr, int i, int j) {//后拿的
+		//如果i == j，即arr[i...j]上只有一张纸牌，作为后拿的人必然什么也得不到，所以返回0；
 		if (i == j) {
 			return 0;
 		}
+		//因为对手会拿走最好的，所以当前玩家只能拿最差的
 		return Math.min(f(arr, i + 1, j), f(arr, i, j - 1));
 	}
 
