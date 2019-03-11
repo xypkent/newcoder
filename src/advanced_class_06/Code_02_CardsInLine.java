@@ -46,8 +46,8 @@ public class Code_02_CardsInLine {
 
 	public static void main(String[] args) {
 		int[] arr = { 1, 9, 1 };
-		System.out.println(win1(arr));
 		System.out.println(win2(arr));
+		System.out.println(win1(arr));
 
 	}
 

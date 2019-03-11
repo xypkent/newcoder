@@ -17,7 +17,7 @@ public class Code_05_Max_EOR {
         return maxEor;
     }
 
-    //dp优化
+    //记忆化搜索优化（利用之前的计算结果）
     public static int getMaxEor2(int[] nums) {
         int maxEor = Integer.MAX_VALUE;
         int[] dp = new int[nums.length];
@@ -34,11 +34,11 @@ public class Code_05_Max_EOR {
         return maxEor;
     }
 
-    public static class Node {//前缀树
+    public static class Node {//前缀树节点
         public Node[] nexts = new Node[2];//只有两个路，0/1
     }
 
-    public static class NumTrie {
+    public static class NumTrie {//前缀树
         public Node head = new Node();
 
         public void add(int num) {
@@ -84,10 +84,11 @@ public class Code_05_Max_EOR {
         int max = Integer.MIN_VALUE;
         int eor = 0;
         NumTrie numTrie = new NumTrie();
-        numTrie.add(0);
+        numTrie.add(0);//0和0异或
         for (int i = 0; i < arr.length; i++) {
             eor ^= arr[i];// 0 .. i
-            //这个黑盒超好用，放入0~i eor，给你选择出一个最大的
+            //这个黑盒超好用
+            //放入0~i eor，返回以i结尾下最大的异或和子数组的异或值
             max = Math.max(max, numTrie.maxXor(eor));
             numTrie.add(eor);
         }
