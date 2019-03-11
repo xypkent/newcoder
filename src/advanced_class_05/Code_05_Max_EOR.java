@@ -46,21 +46,31 @@ public class Code_05_Max_EOR {
             //位移，整数是31位
             for (int move = 31; move >= 0; move--) {
                 //提取出每个进制里面的数字
-                int path = ((num >> move) & 1);//1,0
+                //例如：0101 >> 3 = 0
+                //在和1进行与运算
+                //0 0 0 0
+                //0 0 0 1
+                //0 0 0 0 //取出了第一位为0
+                int path = ((num >> move) & 1);
+                //查看是否有路，没有就新建
                 cur.nexts[path] = cur.nexts[path] == null ? new Node() : cur.nexts[path];
                 cur = cur.nexts[path];
             }
         }
 
+        //num 0~i eor结果，选出最优再返回
         public int maxXor(int num) {
             Node cur = head;
             int res = 0;
             for (int move = 31; move >= 0; move--) {
                 int path = (num >> move) & 1;
-                int best = move == 31 ? path : (path ^ 1);
-                best = cur.nexts[best] != null ? best : (best ^ 1);
-                res |= (path ^ best) << move;
-                cur = cur.nexts[best];
+                //如果考察符号位希望和path是一样的 1^1=0 0^0=0
+                //其他位置，希望是相反的 1^0=1 0^1=1
+                int best = move == 31 ? path : (path ^ 1);//期待
+                best = cur.nexts[best] != null ? best : (best ^ 1);//实际
+                //当前位的最优选择，左移当前位的数值后，加入结果(或一下)
+                res |= (path ^ best) << move;//设置每一位的答案
+                cur = cur.nexts[best];//下一层
             }
             return res;
         }
