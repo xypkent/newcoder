@@ -34,8 +34,10 @@ public class Code_02_CardsInLine {
 		}
 		int[][] f = new int[arr.length][arr.length];
 		int[][] s = new int[arr.length][arr.length];
+		//一边设置对角线，一边计算值，对角线慢慢向上走
 		for (int j = 0; j < arr.length; j++) {
 			f[j][j] = arr[j];
+			//设计的很好，以列为首要遍历条件，再逐行向下计算
 			for (int i = j - 1; i >= 0; i--) {
 				f[i][j] = Math.max(arr[i] + s[i + 1][j], arr[j] + s[i][j - 1]);
 				s[i][j] = Math.min(f[i + 1][j], f[i][j - 1]);

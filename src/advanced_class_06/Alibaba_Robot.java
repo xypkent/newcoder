@@ -22,4 +22,34 @@ public class Alibaba_Robot {
         return count;
     }
 
+    public static int dpWalk(int N, int curPosition, int remainSteps, int K) {
+        int[][] dp = new int[remainSteps + 1][N + 1];
+        dp[0][K] = 1;
+
+        for (int i = 1; i <= remainSteps; i++) {
+            for (int j = 1; j <= N; j++) {
+                dp[i][j] += j - 1 < 1 ? 0 : dp[i - 1][j - 1];
+                dp[i][j] += j + 1 > N ? 0 : dp[i - 1][j + 1];
+            }
+        }
+
+        return dp[remainSteps][curPosition];
+    }
+
+    public static void main(String[] args) {
+        System.out.println(walk(5, 3, 0, 3));
+        System.out.println(walk(5, 3, 2, 3));
+        System.out.println(dpWalk(5, 3, 0, 3));
+        System.out.println(dpWalk(5, 3, 2, 3));
+    }
+
 }
+
+
+
+
+
+
+
+
+
